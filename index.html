@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+    <head>
+        <title>go-gorilla-websocket</title>
+    </head>
+    
+    <body>
+        <h1>!</h1>
+        
+        <script>
+            ;(function() {
+                "use strict";
+                
+                let ws = new WebSocket("ws://localhost:9876/ws")
+                
+                const send = function() {
+                    ws.send(JSON.stringify({
+                        msg: 'a'
+                    }))
+                }
+                
+                ws.onmessage = function({data}) {
+                    console.log(data); 
+                    
+                    setTimeout(() => {
+                        send()        
+                    }, 1000)   
+                };
+                
+                ws.onready = function() {
+                    send()    
+                };
+            }());
+        </script>
+    </body>
+</html>
